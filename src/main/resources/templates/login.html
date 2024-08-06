@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
+<head>
+    <title>ログインページ | 課題管理アプリケーション</title>
+</head>
+<body>
+<h1 class="mt-3">課題管理アプリケーション</h1>
+<div th:if="${param.error}">
+    <p>ユーザ名もしくはパスワードが違います</p>
+</div>
+<form action="#" th:action="@{/login}" method="post">
+    <div class="mt-3">
+        <label for="userNameInput" class="form-label">ユーザ名</label>
+        <input type="text" id="userNameInput" name="username" class="form-control">
+    </div>    
+    <div class="mt-3">
+        <label for="passwordNameInput" class="form-label">パスワード</label>
+        <input type="password" id="passwordNameInput" name="password" class="form-control">
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">ログイン</button>
+    </div>
+</form>
+
+</body>
+</html>
