@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
 <head>
-    <title>トップページ | 課題管理アプリケーション</title>
+    <title>キャッシュページ | 課題管理アプリケーション</title>
     <!-- Bootstrap CSSの読み込み -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -17,10 +17,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="./issues/list.html" th:href="@{/issues}">課題一覧</a>
+                <a class="nav-link" th:href="@{/}">Topへ戻る</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./issues/logout.html" th:href="@{/logout}">ログアウト</a>
+                <a class="nav-link" th:href="@{/logout}">ログアウト</a>
             </li>
         </ul>
     </div>
@@ -28,18 +28,25 @@
 
 <!-- メインコンテンツ -->
 <div class="container mt-5">
-    <h1 class="mb-4">課題管理アプリケーションへようこそ</h1>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a th:href="@{/issues}">課題一覧</a>
-        </li>
-        <li class="list-group-item">
-            <a th:href="@{/logout}">ログアウト</a>
-        </li>
-        <li class="list-group-item">
-            <a th:href="@{/cache}">キャッシュ</a>
-        </li>
-    </ul>
+    <h1 class="mb-4">キャッシュをしてみよう</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>概要</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="issue : ${issueList}">
+            <th th:text="${issue.id}">(id)</th>
+            <td>
+                <a href="./detail.html" th:href="@{/issues/{issueId}(issueId=${issue.id})}" th:text="${issue.summary}">
+                    (summary)
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <!-- Bootstrap JSと依存するJSの読み込み -->
